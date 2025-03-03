@@ -11,8 +11,8 @@ def fetch_graph_data():
     try:
         result = neo4j_conn.query(query)
         return [{"source": record["source"], "destination": record["destination"],
-                 "method": record.get("method", "Unknown"), "type": record.get("type", "Unknown"),
-                 "calls": record.get("calls", 0), "avg_duration": record.get("avg_duration", 0)}
+                 "method": record["method"], "type": record["type"],
+                 "calls": record["calls"], "avg_duration": record["avg_duration"]}
                 for record in result]
     except Exception as e:
         return {"status": "error", "message": f"Neo4j query failed: {str(e)}"}
