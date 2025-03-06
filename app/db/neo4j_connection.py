@@ -1,11 +1,12 @@
+import os
 from neo4j import GraphDatabase
 
 
 class Neo4jConnection:
     def __init__(self):
-        self._uri = "bolt://localhost:7687"
-        self._user = "neo4j"
-        self._password = "H7t-YFBxjSBWxIFnhO7OaGAjKwk6c-q5wxq_yP95E1M"
+        self._uri = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+        self._user = os.getenv("NEO4J_USERNAME", "neo4j")
+        self._password = os.getenv("NEO4J_PASSWORD", "H7t-YFBxjSBWxIFnhO7OaGAjKwk6c-q5wxq_yP95E1M")
         self._driver = None
 
     def connect(self):
