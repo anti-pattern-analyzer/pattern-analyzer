@@ -11,6 +11,27 @@ from app.services.patterns_service import (
 router = APIRouter()
 
 
+@router.get("/all")
+async def get_all_patterns():
+    """
+    Exposes all pattern detection services in a single API call.
+    """
+    return {
+        "cyclic_dependencies": detect_cyclic_anti_patterns(),
+        "knot_patterns": detect_knot_patterns(),
+        "bottleneck_services": detect_bottleneck_anti_patterns(),
+        "nano_services": detect_nano_service_patterns(),
+        "long_service_chains": detect_long_chain_patterns(),
+        "fan_in_overload": detect_fan_in_overload_patterns(),
+        "fan_out_overload": detect_fan_out_overload_patterns(),
+        "chatty_services": detect_chatty_service_patterns(),
+        "sync_overuse": detect_sync_overuse_patterns(),
+        "api_gateway_usage": detect_improper_api_gateway_usage_patterns(),
+        "eventual_consistency": detect_eventual_consistency_patterns(),
+        "improper_load_balancer": detect_improper_load_balancer_patterns(),
+    }
+
+
 @router.get("/cyclic")
 async def get_cyclic_dependencies():
     return detect_cyclic_anti_patterns()
